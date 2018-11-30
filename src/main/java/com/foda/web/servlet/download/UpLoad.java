@@ -1,7 +1,7 @@
 package com.foda.web.servlet.download;
 
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -24,10 +24,23 @@ public class UpLoad extends HttpServlet {
         boolean multipartContent = ServletFileUpload.isMultipartContent(req);
         //判断前端的for是否有multipart属性
         if(multipartContent){
-            FileItemFactory factory = new DiskFileItemFactory();
+            DiskFileItemFactory factory = new DiskFileItemFactory();
             ServletFileUpload fileUpload = new ServletFileUpload(factory);
 
+            //上传文件限制
             try {
+                //设置上传文件的临时缓冲文件的大小DiskFileItemFactory
+                factory.setSizeThreshold(1024*20);
+                String tmp = "d:\\uploadtmp";
+                File file_tmp = new File(tmp);
+                if(!(file_tmp.exists())){
+                    file_tmp.mkdirs();
+                }
+                factory.setRepository(file_tmp);
+
+                //设置单个上传文件大小,单位byte，--> ServletFileUpload
+                fileUpload.setSizeMax(1024*70);
+
                 //通过parseRequest解析form中的所有请求字段，并保存到items集合中(即前端传递的no,name,picture)
                 List<FileItem> items = fileUpload.parseRequest(req);
 
@@ -70,13 +83,25 @@ public class UpLoad extends HttpServlet {
                         if(!parentFile.exists()){
                             parentFile.mkdirs();
                         }
+
+                        //限制上传文件类型
+                        String str = fileName.substring(fileName.indexOf(".") + 1);
+                        if(!(str.equals("jpg") || str.equals("png") || str.equals("gif"))){
+                            System.out.println("上传文件类型错误");
+                            return;
+                        }
                         //上传
                         item.write(file);
                     }
                 }
 
-            } catch (FileUploadException e) {
+            }catch (FileUploadBase.SizeLimitExceededException e) {
+                //e.printStackTrace();
+                System.out.println("文件大小超过70kb");
+            }
+            catch (FileUploadException e) {
                 e.printStackTrace();
+
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             } catch (Exception e) {
