@@ -3,9 +3,7 @@ package com.foda.web.servlet.download;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 
 /**
  * @author pxz
@@ -15,7 +13,7 @@ public class DownLoadServlet extends HttpServlet{
 
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp){
         //获取想要下载的文件的名字
         String fileName = req.getParameter("filename");
 
@@ -26,27 +24,54 @@ public class DownLoadServlet extends HttpServlet{
         //        path = resource.getPath();
         //    }
 
-        // /D:/IdeaWorkspace/java-learn/my-web/target/my-web-1.0-SNAPSHOT/WEB-INF/classes/
-
+        //路径修改
         String path = getServletContext().getRealPath("download/" + fileName);
+        File parentFile = new File(path).getParentFile().getParentFile().getParentFile();
+        String parent = parentFile.getParent();
+        String downPath = parent+"/src/main/webapp/download/";
 
+        //下载文件，设置消息头
         //让浏览器收到这份资源的时候， 以下载的方式提醒用户，而不是直接展示。
-        //resp.setHeader("Content-Disposition", "attachment; filename="+fileName);
-
+        //MIME类型：application/octet-stream，表示是以二进制形式下载
+        resp.addHeader("content-Type","application/octet-stream");
+        resp.addHeader("Content-Disposition", "attachment; filename="+fileName);
 
         //转化成输入流
-        FileInputStream inputStream = new FileInputStream(path);
-        OutputStream outputStream = resp.getOutputStream();
+        //从指定的文件目录下查找
+        FileInputStream inputStream = null;
+        OutputStream outputStream = null;
+        try {
+            //从D:/IdeaWorkspace/java-learn/my-web/target/my-web-1.0-SNAPSHOT编译好的文件的目录下查找
+            //InputStream inputStream = getServletContext().getResourceAsStream(downPath + fileName);
 
-        int len;
-        byte[] buffer = new byte[1024];
-        while( (len = inputStream.read(buffer)) != -1){
-            System.out.println(new String (buffer,0,len));
-            outputStream.write(buffer, 0, len);
+            inputStream = new FileInputStream(downPath + fileName);
+            outputStream = resp.getOutputStream();
+            int len;
+            byte[] buffer = new byte[1024];
+            while( (len = inputStream.read(buffer)) != -1){
+                outputStream.write(buffer, 0, len);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if(inputStream != null){
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(outputStream != null){
+                try {
+                    outputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
-        inputStream.close();
-        outputStream.close();
     }
 
     @Override
