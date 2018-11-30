@@ -163,6 +163,6 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>upload</servlet-name>
-        <url-pattern>/upload</url-pattern>
+        <url-pattern>/download/upload</url-pattern>
     </servlet-mapping>
 </web-app>
