@@ -47,16 +47,16 @@
         <!--<servlet-name>CountServlet</servlet-name>-->
         <!--<url-pattern>/count</url-pattern>-->
     <!--</servlet-mapping>-->
-    <servlet>
-        <description></description>
-        <display-name>DownLoadServlet</display-name>
-        <servlet-name>DownLoadServlet</servlet-name>
-        <servlet-class>com.foda.web.servlet.download.DownLoadServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>DownLoadServlet</servlet-name>
-        <url-pattern>/download</url-pattern>
-    </servlet-mapping>
+    <!--<servlet>-->
+        <!--<description></description>-->
+        <!--<display-name>DownLoadServlet</display-name>-->
+        <!--<servlet-name>DownLoadServlet</servlet-name>-->
+        <!--<servlet-class>com.foda.web.servlet.download.DownLoadServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>DownLoadServlet</servlet-name>-->
+        <!--<url-pattern>/download</url-pattern>-->
+    <!--</servlet-mapping>-->
     <!--<servlet>-->
     <!--<description></description>-->
     <!--<display-name>CookieDemo</display-name>-->
@@ -155,14 +155,77 @@
         <!--<url-pattern>/check</url-pattern>-->
     <!--</servlet-mapping>-->
 
-    <servlet>
-        <description></description>
-        <display-name>upload</display-name>
-        <servlet-name>upload</servlet-name>
-        <servlet-class>com.foda.web.servlet.download.UpLoad</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>upload</servlet-name>
-        <url-pattern>/download/upload</url-pattern>
-    </servlet-mapping>
+    <!--<servlet>-->
+        <!--<description></description>-->
+        <!--<display-name>upload</display-name>-->
+        <!--<servlet-name>upload</servlet-name>-->
+        <!--<servlet-class>com.foda.web.servlet.download.UpLoad</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>upload</servlet-name>-->
+        <!--<url-pattern>/download/upload</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+
+    <!--<servlet>-->
+    <!--<description></description>-->
+    <!--<display-name>filterServlet</display-name>-->
+    <!--<servlet-name>filterServlet</servlet-name>-->
+    <!--<servlet-class>com.foda.web.servlet.filter.FilterServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+    <!--<servlet-name>filterServlet</servlet-name>-->
+    <!--<url-pattern>/filter</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!--过滤器配置-->
+    <!--<filter>-->
+        <!--<display-name>encodingFilter</display-name>-->
+        <!--<filter-name>encodingFilter</filter-name>-->
+        <!--<filter-class>com.foda.web.servlet.filter.EncodingFilter</filter-class>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>encodingFilter</filter-name>-->
+        <!--<url-pattern>/*</url-pattern>-->
+    <!--</filter-mapping>-->
+
+    <!--注册监听器MyServletContextListener-->
+    <!--<listener>-->
+        <!--<listener-class>com.foda.web.servlet.listener.MyServletContextListener</listener-class>-->
+    <!--</listener>-->
+
+    <!--注册监听器MyServletRequestListener-->
+    <!--<listener>-->
+        <!--<listener-class>com.foda.web.servlet.listener.MyServletRequestListener</listener-class>-->
+    <!--</listener>-->
+    <!--<servlet>-->
+    <!--<description></description>-->
+    <!--<display-name>MyRequestListener</display-name>-->
+    <!--<servlet-name>MyRequestListener</servlet-name>-->
+    <!--<servlet-class>com.foda.web.servlet.listener.MyRequestServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+    <!--<servlet-name>MyRequestListener</servlet-name>-->
+    <!--<url-pattern>/listener</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!--注册监听器MyHttpSessionListener-->
+    <!--<listener>-->
+        <!--<listener-class>com.foda.web.servlet.listener.MyHttpSessionListener</listener-class>-->
+    <!--</listener>-->
+    <!--<servlet>-->
+        <!--<description></description>-->
+        <!--<display-name>MySessionServlet</display-name>-->
+        <!--<servlet-name>MySessionServlet</servlet-name>-->
+        <!--<servlet-class>com.foda.web.servlet.listener.MySessionServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>MySessionServlet</servlet-name>-->
+        <!--<url-pattern>/listener</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!--<listener>-->
+        <!--<listener-class>com.foda.web.servlet.listener.listener_attribute.MyHttpSessionListener</listener-class>-->
+    <!--</listener>-->
+
 </web-app>
