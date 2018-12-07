@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet{
             //定位跳转的位置是哪一个页面。
             resp.setHeader("Location", "login_success.html");
         }else {
-            writer.write("login failed");
+            writer.write("UserDao failed");
         }
 
 

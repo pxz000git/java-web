@@ -17,7 +17,7 @@ public class CountServlet extends HttpServlet{
         int count = (Integer) getServletContext().getAttribute("count");
 
         //输出到界面
-        resp.getWriter().write("login success count ===:" + count);
+        resp.getWriter().write("UserDao success count ===:" + count);
     }
 
     @Override
