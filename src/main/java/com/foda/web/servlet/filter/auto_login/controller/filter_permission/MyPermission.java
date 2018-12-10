@@ -34,7 +34,7 @@ public class MyPermission implements Filter{
             if(user != null){
                 System.out.println("session中有值");
                 filterChain.doFilter(servletRequest,servletResponse);
-                request.getRequestDispatcher("index.jsp").forward(request,response);
+                request.getRequestDispatcher("index_filter.jsp").forward(request,response);
             }
             //session失效
             else {

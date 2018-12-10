@@ -1,6 +1,7 @@
 package com.foda.web.servlet.filter;
 
 import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
@@ -14,12 +15,15 @@ public class FilterDemo implements Filter {
 
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 
-        System.out.println("拦截前...");
+        System.out.println("拦截前---1...");
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+
 
         //执行下一个servlet或filter
         filterChain.doFilter(servletRequest,servletResponse);
 
-        System.out.println("拦截后...");
+        request.getSession().setAttribute("abc","abc");
+        System.out.println("拦截后---2...");
 
     }
 

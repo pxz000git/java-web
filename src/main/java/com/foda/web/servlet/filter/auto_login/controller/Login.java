@@ -45,7 +45,7 @@ public class Login extends HttpServlet{
             //登录成功
             req.getSession().setAttribute("user",user);
             //重定向到首页页
-            resp.sendRedirect("index.jsp");
+            resp.sendRedirect("index_filter.jsp");
 
         }
         else{
